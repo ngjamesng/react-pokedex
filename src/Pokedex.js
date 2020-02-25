@@ -9,6 +9,7 @@ function Pokedex(props) {
 				return <Pokecard pokemon={d} key={d.id} />;
 			})}
       <h2>{props.isWinner ? "WINNING HAND!" : "LOSING HAND!"}</h2>
+      <h2>Total exp: {props.exp}</h2>
 		</div>
 	);
 }

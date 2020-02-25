@@ -2,8 +2,9 @@ import React from "react";
 import Pokedex from "./Pokedex";
 
 function Pokegame(props) {
-  let hand1 = props.data.slice(0, 4);
-  let hand2 = props.data.slice(4);
+  let shuffledHand = shuffle(props.data);
+  let hand1 = shuffledHand.slice(0, 4);
+  let hand2 = shuffledHand.slice(4, 8);
 
   let hand1Exp = hand1.reduce((acc, cur) => acc + cur.base_experience, 0);
   let hand2Exp = hand2.reduce((acc, cur) => acc + cur.base_experience, 0);
@@ -16,11 +17,11 @@ function Pokegame(props) {
     <div>
       <div>
         <h2>Hand 1</h2>
-        <Pokedex data={hand1} experience={hand1Exp} isWinner={hand1Winner} />
+        <Pokedex data={hand1} experience={hand1Exp} isWinner={hand1Winner} exp={hand1Exp} />
       </div>
       <div>
         <h2>Hand 2</h2>
-        <Pokedex data={hand2} experience={hand2Exp} isWinner={hand2Winner} />
+        <Pokedex data={hand2} experience={hand2Exp} isWinner={hand2Winner} exp={hand2Exp} />
       </div>
     </div>
   );
@@ -38,5 +39,16 @@ Pokegame.defaultProps = {
     { id: 133, name: "Eevee", type: "normal", base_experience: 65 }
   ]
 };
+
+function shuffle(hand){
+  let shuffled = [...hand];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+		//looping backwards, set j to a random number between 0 and i
+		let j = Math.floor(Math.random() * (i + 1));
+		//swap values at index "i" and "j"
+		[ shuffled[i], shuffled[j] ] = [ shuffled[j], shuffled[i] ];
+	}
+  return shuffled;
+}
 
 export default Pokegame;
