@@ -8,6 +8,7 @@ function Pokedex(props) {
 			{props.data.map((d) => {
 				return <Pokecard pokemon={d} key={d.id} />;
 			})}
+      <h2>{props.isWinner ? "WINNING HAND!" : "LOSING HAND!"}</h2>
 		</div>
 	);
 }
